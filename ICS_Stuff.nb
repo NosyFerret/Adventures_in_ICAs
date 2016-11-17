@@ -1,0 +1,254 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      9178,        245]
+NotebookOptionsPosition[      8562,        218]
+NotebookOutlinePosition[      8915,        234]
+CellTagsIndexPosition[      8872,        231]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Clear", "[", "\"\<Global`*\>\"", "]"}]], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"data", "=", 
+   RowBox[{"Import", "[", "\"\<Desktop/ICAs/Data5/history110\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"timesteps", "=", 
+   RowBox[{"data", "//", "Length"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"width", "=", 
+   RowBox[{
+    RowBox[{"data", "[", 
+     RowBox[{"[", "1", "]"}], "]"}], "//", "Length"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.665281286689849*^9, 3.665281322039825*^9}, {
+  3.665281359516982*^9, 3.665281360681991*^9}, {3.665282210220834*^9, 
+  3.66528222452283*^9}, {3.665284077077829*^9, 3.665284078004231*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"FULLmaxcompression", "=", 
+  RowBox[{
+   RowBox[{"Table", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"g", "[", "x_", "]"}], ":=", 
+       RowBox[{"IntegerDigits", "[", 
+        RowBox[{"x", ",", "2", ",", "w"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"g", "/@", 
+         RowBox[{"RandomInteger", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"0", ",", "width"}], "}"}], ",", "timesteps"}], "]"}]}], "//",
+         "Compress"}], "//", "ByteCount"}]}], "\[IndentingNewLine]", ",", 
+     RowBox[{"{", "1000", "}"}]}], "]"}], "//", "Max"}]}]], "Input",
+ CellChangeTimes->{{3.6652815607623663`*^9, 3.665281595891672*^9}, {
+   3.665281680271391*^9, 3.665281681590314*^9}, {3.6652818053127728`*^9, 
+   3.665281825054504*^9}, 3.6652819137799892`*^9, 3.665282125221113*^9, {
+   3.6652822575155993`*^9, 3.665282274022156*^9}, 3.665282351506288*^9}],
+
+Cell[BoxData["3624"], "Output",
+ CellChangeTimes->{3.665282277991459*^9, 3.665282389727528*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"STEPmaxcompression", "=", 
+  RowBox[{
+   RowBox[{"Table", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"RandomInteger", "[", 
+        RowBox[{"1", ",", "width"}], "]"}], "//", "Compress"}], "//", 
+      "ByteCount"}], "\[IndentingNewLine]", ",", 
+     RowBox[{"{", "10000", "}"}]}], "]"}], "//", "Max"}]}]], "Input",
+ CellChangeTimes->{{3.6652822890147457`*^9, 3.665282289381493*^9}, {
+  3.6652823319250183`*^9, 3.665282341845449*^9}, {3.665283537526525*^9, 
+  3.665283554108727*^9}}],
+
+Cell[BoxData["256"], "Output",
+ CellChangeTimes->{{3.665282336696213*^9, 3.665282347281316*^9}, {
+   3.665283540126821*^9, 3.665283556820427*^9}, 3.6653639166677513`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"step", "=", "5"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"Table", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"data", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{"\"\<Desktop/ICAs/Data\>\"", "<>", 
+       RowBox[{"ToString", "[", "step", "]"}], "<>", "\"\</history\>\"", "<>", 
+       RowBox[{"ToString", "[", "step", "]"}], "<>", 
+       RowBox[{"ToString", "[", "j", "]"}]}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"timesteps", "=", 
+     RowBox[{"data", "//", "Length"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"width", "=", 
+     RowBox[{
+      RowBox[{"data", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "//", "Length"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"compressedtraj", "=", 
+     RowBox[{"Table", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"STEPcompression", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"Compress", "[", 
+             RowBox[{"data", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], "]"}], "//", "ByteCount"}], 
+           ")"}], "/", "STEPmaxcompression"}], "//", "N"}]}], 
+       "\[IndentingNewLine]", ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{"data", "//", "Length"}]}], "}"}]}], "]"}]}], ";", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"plot", "=", 
+     RowBox[{"ListLinePlot", "[", "\[IndentingNewLine]", 
+      RowBox[{"compressedtraj", "\[IndentingNewLine]", ",", 
+       RowBox[{"PlotRange", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"All", ",", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}], ",", 
+       RowBox[{"PlotLabel", "\[Rule]", 
+        RowBox[{"\"\<50% stochas, Temp = \>\"", "<>", 
+         RowBox[{"ToString", "[", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"j", "-", "1"}], ")"}], "/", "10"}], ")"}], "//", "N"}],
+           "]"}]}]}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", "Full"}]}], "]"}]}], ";", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"\"\<Desktop/ICAs/CompressionImages/Data\>\"", "<>", 
+       RowBox[{"ToString", "[", "step", "]"}], "<>", 
+       "\"\</Compression_Stoch\>\"", "<>", 
+       RowBox[{"ToString", "[", "step", "]"}], "<>", "\"\<_Temp\>\"", "<>", 
+       RowBox[{"ToString", "[", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"j", "-", "1"}], ")"}], "/", "10"}], ")"}], "//", "N"}], 
+        "]"}], "<>", "\"\<.pdf\>\""}], ",", "plot"}], "]"}]}], 
+   "\[IndentingNewLine]", ",", 
+   RowBox[{"{", 
+    RowBox[{"j", ",", "1", ",", "11"}], "}"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.665283026131435*^9, 3.6652830314883966`*^9}, {
+  3.6652830862244*^9, 3.665283146711021*^9}, {3.665283182308866*^9, 
+  3.66528324069777*^9}, {3.6652832746230717`*^9, 3.6652832886502237`*^9}, {
+  3.665283346291656*^9, 3.665283506612937*^9}, {3.665283578364447*^9, 
+  3.665283583171192*^9}, {3.665283624043487*^9, 3.665283632074758*^9}, {
+  3.6652836963930073`*^9, 3.665283699498488*^9}, {3.6652837435198*^9, 
+  3.665283749029211*^9}, {3.665284053570757*^9, 3.6652841027159986`*^9}, {
+  3.665363552102273*^9, 3.6653635729267693`*^9}, {3.665363606482028*^9, 
+  3.665363658927034*^9}, {3.66536368945368*^9, 3.665363729090199*^9}, {
+  3.6653638688477097`*^9, 3.665363879268878*^9}, {3.66536396661069*^9, 
+  3.6653639843386307`*^9}, {3.665364038461735*^9, 3.6653640921544657`*^9}, {
+  3.665364161208605*^9, 3.665364163350287*^9}, {3.665364736106691*^9, 
+  3.6653647937774477`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"Desktop/ICAs/CompressionImages/Data5/Compression_Stoch5_Temp0..\
+pdf\"\>", 
+   ",", "\<\"Desktop/ICAs/CompressionImages/Data5/Compression_Stoch5_Temp0.1.\
+pdf\"\>", 
+   ",", "\<\"Desktop/ICAs/CompressionImages/Data5/Compression_Stoch5_Temp0.2.\
+pdf\"\>", 
+   ",", "\<\"Desktop/ICAs/CompressionImages/Data5/Compression_Stoch5_Temp0.3.\
+pdf\"\>", 
+   ",", "\<\"Desktop/ICAs/CompressionImages/Data5/Compression_Stoch5_Temp0.4.\
+pdf\"\>", 
+   ",", "\<\"Desktop/ICAs/CompressionImages/Data5/Compression_Stoch5_Temp0.5.\
+pdf\"\>", 
+   ",", "\<\"Desktop/ICAs/CompressionImages/Data5/Compression_Stoch5_Temp0.6.\
+pdf\"\>", 
+   ",", "\<\"Desktop/ICAs/CompressionImages/Data5/Compression_Stoch5_Temp0.7.\
+pdf\"\>", 
+   ",", "\<\"Desktop/ICAs/CompressionImages/Data5/Compression_Stoch5_Temp0.8.\
+pdf\"\>", 
+   ",", "\<\"Desktop/ICAs/CompressionImages/Data5/Compression_Stoch5_Temp0.9.\
+pdf\"\>", 
+   ",", "\<\"Desktop/ICAs/CompressionImages/Data5/Compression_Stoch5_Temp1..\
+pdf\"\>"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.665283124151401*^9, 3.66528330549263*^9, {3.665283418759104*^9, 
+   3.66528343824951*^9}, 3.6652835744915237`*^9, 3.665283616665306*^9, 
+   3.665283650343115*^9, 3.6652837193946867`*^9, 3.6652837666886683`*^9, 
+   3.665284072802663*^9, 3.665284120968342*^9, {3.665363594413755*^9, 
+   3.665363641049554*^9}, 3.665363680918468*^9, 3.66536371314336*^9, 
+   3.665363747634959*^9, 3.665363896316078*^9, 3.6653639369006023`*^9, 
+   3.665363988925164*^9, 3.665364112205596*^9, 3.665364178760477*^9, {
+   3.665364755978015*^9, 3.665364780172838*^9}, 3.665364810374751*^9}]
+}, Open  ]]
+},
+WindowSize->{808, 651},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+FrontEndVersion->"10.1 for Mac OS X x86 (32-bit, 64-bit Kernel) (March 23, \
+2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 73, 1, 28, "Input"],
+Cell[634, 23, 624, 15, 63, "Input"],
+Cell[CellGroupData[{
+Cell[1283, 42, 983, 23, 80, "Input"],
+Cell[2269, 67, 95, 1, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2401, 73, 549, 13, 63, "Input"],
+Cell[2953, 88, 170, 2, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3160, 95, 3756, 86, 352, "Input"],
+Cell[6919, 183, 1627, 32, 199, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
